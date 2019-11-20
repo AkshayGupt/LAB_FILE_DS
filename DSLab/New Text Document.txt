@@ -1,0 +1,67 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int data;
+    int head;
+    struct node *next;
+}*start=NULL,*last=NULL,*t,*temp,*prv;
+int main()
+{   
+    int n,k,h,i;
+    printf("Enter the value of n :");
+    scanf("%d",&n);
+    printf("Enter the value of k :");
+    scanf("%d",&k);
+    printf("Enter the value of head :");
+    scanf("%d",&h);
+    for(i=0;i<n;i++)
+    {
+        t=(struct node *)malloc(sizeof(struct node));
+        t->data=i+1;
+        t->head=h;
+        
+        if(start==NULL)
+        {
+            start=t;
+            last=t;
+            
+        }
+        else
+        {
+            last->next=t;
+            last=last->next;
+            
+        }
+    }
+    last->next=start;
+    int length=n;
+temp=start;
+prv=NULL;
+int count=0;
+        while(length!=1)
+        {
+            for(i=count;i<count+k-1;i++)
+            {   
+                   
+                    prv=temp;
+                    temp=temp->next;
+                   
+            }
+            count=i;
+            temp->head--;
+            if(temp->head==0)
+            {   
+                printf("Deleted :%d\n",temp->data);
+
+                prv->next=temp->next;
+                length--;
+                temp=prv->next;
+            }
+            
+        }
+        printf("Final Answer\n");
+        printf("%d",temp->data);
+
+    return 0;
+}
